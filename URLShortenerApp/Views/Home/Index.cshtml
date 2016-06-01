@@ -1,3 +1,11 @@
 ﻿@{
     ViewBag.Title = "URL Shortener App";
 }
+
+<div class="">
+    @using (Html.BeginForm("Shortener", "Home", FormMethod.Post))
+    {
+        <span style="font-weight:bold;">URL : </span> @Html.TextBox("Url");
+        <input type="submit" value="Shorten" class="btn btn-primary btn-sm"/>
+    }
+</div>

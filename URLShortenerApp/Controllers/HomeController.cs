@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using URLShortenerApp.Models;
 
 namespace URLShortenerApp.Controllers
 {
@@ -12,5 +13,16 @@ namespace URLShortenerApp.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Shortener(string Url)
+        {
+            UrlClass UrlClass = new UrlClass();
+            UrlClass.Url = Url;
+
+
+            return View(UrlClass);
+        }
+
     }
 }
