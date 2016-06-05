@@ -23,6 +23,7 @@ namespace URLShortenerApp.Controllers
                                    where c.LongUrl == InputUrl
                                    select c).FirstOrDefault();
 
+            //Checking the URL entered by user is not duplicated in database
             if (existingLongUrl == null)
             {
                 string shortenedUrl = GetUniqueShortUrl();
@@ -50,6 +51,8 @@ namespace URLShortenerApp.Controllers
             return View();
         }
 
+
+        //Get a unique shotened URL string
         public string GetUniqueShortUrl()
         {
             //Random String for shorten Url
@@ -62,6 +65,7 @@ namespace URLShortenerApp.Controllers
                                     where c.ShortUrl == ShortenedUrl
                                     select c).FirstOrDefault();
 
+            //Checking the shortened URL is unique and is not duplicated in database
             if (existingShortUrl != null)
             {
                 GetUniqueShortUrl();
@@ -70,6 +74,7 @@ namespace URLShortenerApp.Controllers
             return ShortenedUrl;
         }
 
+        //Finding long URL by looking for shortened URL from database
         public ActionResult LongUrlFinder(string shortUrl)
         {
             var ActualUrl = (from c in db.Urls
@@ -78,10 +83,12 @@ namespace URLShortenerApp.Controllers
 
             if(ActualUrl == null)
             {
+                //If no such URL redirect to Home
                 return RedirectToAction("Index");
             } else
             {
-                return Redirect("http://" + ActualUrl.LongUrl);
+                //If such URL found, redirect to it's website
+                return Redirect(ActualUrl.LongUrl);
             }
         }
     }

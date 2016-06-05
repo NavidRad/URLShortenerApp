@@ -2,10 +2,27 @@
     ViewBag.Title = "URL Shortener App";
 }
 
-<div class="">
-    @using (Html.BeginForm("UrlShortener", "Home", FormMethod.Post))
+<div class="main">
+    @using (Html.BeginForm("UrlShortener", "Home", FormMethod.Post, new { id = "UrlForm" }))
     {
-        <span style="font-weight:bold;">URL : </span> @Html.TextBox("InputUrl");
-        <input type="submit" value="Shorten" class="btn btn-primary btn-sm"/>
+        <span style="font-weight:bold;">URL :</span> <span class="example">i.e. https://www.google.com</span>
+        @Html.TextBox("InputUrl", null, new { @class = "form-control" })
+        <br/><input type="submit" value="Shorten" id="submit" class="btn btn-primary btn-sm"/>
     }
 </div>
+
+<label class="footer">URL Shortener Application - Navid Rad 2016</label>
+
+@*Validating InputUrl for making sure user enter a valid URL*@
+@section Scripts {
+    <script>
+        $("#UrlForm").validate({
+            rules: {
+                InputUrl: {
+                    required: true,
+                    url: true
+                }
+            }
+        });
+    </script>
+}
