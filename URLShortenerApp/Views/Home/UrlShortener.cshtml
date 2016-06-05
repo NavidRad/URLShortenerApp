@@ -1,0 +1,5 @@
+﻿@model URLShortenerApp.Models.Url
+
+<h2>Short URL for @ViewBag.LongUrl is:</h2> 
+
+@Html.ActionLink((string)ViewBag.ShortUrl, "LongUrlFinder", "Home", new { shortUrl = (string)ViewBag.ShortUrl }, null)
