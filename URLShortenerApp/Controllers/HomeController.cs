@@ -56,9 +56,9 @@ namespace URLShortenerApp.Controllers
         public string GetUniqueShortUrl()
         {
             //Random String for shorten Url
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var random = new Random();
-            string ShortenedUrl = new string(Enumerable.Repeat(chars, 6)
+            string ShortenedUrl = new string(Enumerable.Repeat(chars, 9)
               .Select(s => s[random.Next(s.Length)]).ToArray());
 
             var existingShortUrl = (from c in db.Urls
